@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+  <node name="turtlesim_node" pkg="turtlesim" type="turtlesim_node" output="screen" >
+  </node>
+  <!--发控制指令-->
+  <node name="xbee_bridge_tx" pkg="xbee_bridge" type="xbee_bridge_tx.py">
+        <param name="topic" value="/turtle1/cmd_vel"/>
+        <param name="topic_type" value="geometry_msgs/Twist"/>
+        <param name="port" value="/dev/ttyUSB0"/>
+        <param name="rate" value="57600"/>
+        <param name="queue" value="10"/>
+  </node>
+  <!--收位置信息-->
+  <node name="xbee_bridge_rx" pkg="xbee_bridge" type="xbee_bridge_rx.py">
+        <param name="topic" value="/turtle1/pose"/>
+        <param name="topic_type" value="turtlesim/Pose"/>
+        <param name="port" value="/dev/ttyUSB0"/>
+        <param name="rate" value="57600"/>
+  </node>
+
+</launch>
